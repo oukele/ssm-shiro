@@ -1,0 +1,32 @@
+package com.oukele.config.web;
+
+import com.oukele.config.spring.RootConfig;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
+
+public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    //父容器
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{RootConfig.class};
+    }
+    //子容器
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{SpringMvcConfig.class};
+    }
+
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+    //配置过滤器
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8");
+        //这个类的好处是可以通过spring容器来管理filter的生命周期，还有就是，可以通过spring注入的形式，来代理一个filter执行，如shiro
+        DelegatingFilterProxy shiroFilter = new DelegatingFilterProxy("shiroFilter");
+        return new Filter[]{encodingFilter,shiroFilter};
+    }
+
+}
