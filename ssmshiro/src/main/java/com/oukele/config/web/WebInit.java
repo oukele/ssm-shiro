@@ -25,7 +25,11 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8");
         //这个类的好处是可以通过spring容器来管理filter的生命周期，还有就是，可以通过spring注入的形式，来代理一个filter执行，如shiro
+        // 动态委托 给 名为 shiroFilter 的bean
         DelegatingFilterProxy shiroFilter = new DelegatingFilterProxy("shiroFilter");
+        //引用 原目标的 销毁方法。
+        shiroFilter.setTargetFilterLifecycle(true);
+        
         return new Filter[]{encodingFilter,shiroFilter};
     }
 
