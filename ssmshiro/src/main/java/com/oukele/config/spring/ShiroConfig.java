@@ -21,6 +21,7 @@ public class ShiroConfig {
     @Bean
     ShiroFilterFactoryBean shiroFilter(){
         // 设置 shiro 管理器
+        // ShiroFilterFactotyBean 简化了 shiro 的配置
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         //加载 安全管理器
         bean.setSecurityManager(securityManager());
