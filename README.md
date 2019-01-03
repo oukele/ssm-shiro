@@ -54,6 +54,15 @@
 
 @RequiresUser
 当前的Subject 是一个应用程序用户才能被注解的类/实例/方法访问或调用
+
+// 使用 spring jar 中的两个类。 ShiroAnnotationProcessorConfiguration类 ShiroBeanConfiguration 类
+   重写 ShiroAnnotationProcessorConfiguration类 --> 继承 AbstractShiroAnnotationProcessorConfiguration类
+   所以..
+   ~~~
+   asd
+   ~~~
+
+
 ~~~
 
 #### 编程式验证
